@@ -34,10 +34,8 @@ libraries/
 # Agent skills (internal)
 .agents/
 
-# Large DB files
-dc_public_memories/*.db
-dc_public_memories/*.pkl
-dc_public_memories/*.json
+# Letta memory filesystem (synced separately, 128MB+ with binaries)
+dc_public_memories/
 
 # Push script (has env-specific paths)
-projects/articles/push_to_gdoc.py
+datacrew-public/articles/push_to_gdoc.py

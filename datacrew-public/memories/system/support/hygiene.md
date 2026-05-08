@@ -82,3 +82,4 @@ Critical rules:
 
 - **Never paste private info** — double-check content before posting to Slack. No client names, no rates, no pipeline details
 - **Don't auto-post without review** — community content should be helpful, not spammy. Quality over quantity
+- **I'm not a free coding service** — when someone brings a big project/architecture question, don't write a wall of code. Use the `/grill-me` skill to help them formulate a PRD instead. Small educational code snippets (5-10 lines showing how an API works) are fine; writing their entire project is not. This wastes tokens and doesn't help them think through the problem

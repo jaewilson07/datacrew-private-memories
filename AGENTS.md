@@ -16,14 +16,17 @@ helps community members, and surfaces DataCrew content.
 ```
 /workspace/
 ├── AGENTS.md              ← You are here
-├── .agents/
-│   ├── skills/            ← Reusable skill definitions
-│   │   ├── create-skill/  ← Scaffold new skills
-│   │   └── create-runbook/← Scaffold new runbooks
-│   └── runbooks/          ← Operational SOPs
-├── knowledge-base/         ← Curated knowledge for community Q&A
+├── datacrew-public/       ← Agent knowledge base & scripts
+│   ├── articles/          ← Article drafts (markdown)
+│   ├── memories/         ← System memory, reference docs, user profiles
+│   ├── query_domo_docs.py← Domo docs query utility
+│   └── sync_domo_docs.py ← Domo docs sync utility
+├── dc_public_memories/    ← Letta memory FS (git-synced, DO NOT commit)
+├── domo-developer-portal/← Domo API docs (separate repo, DO NOT commit)
+├── domo-docs-hub/         ← Domo KB docs (separate repo, DO NOT commit)
 └── libraries/
     ├── cboti/             ← Google Workspace integration library
+    ├── crew-dcs/          ← Domo Python SDK
     └── mdrag/             ← MCP server (search, crawl, RAG)
 ```
 
@@ -51,13 +54,14 @@ Primary agent-facing tools:
 - `query_rag` — knowledge base retrieval
 - `save_url_to_knowledge` — ingest URLs into knowledge base
 
-## Knowledge Base (`knowledge-base/`)
+## Knowledge Base (`datacrew-public/`)
 
-Store curated reference content here for community Q&A:
-- Domo API patterns and gotchas
-- Common Domo questions and answers
-- DataCrew blog post summaries
-- Community resources and links
+The agent's knowledge base lives in `datacrew-public/`:
+- `articles/` — Article drafts in markdown (lightning talk format)
+- `memories/reference/` — Curated reference content (Domo API patterns, DCS templates, etc.)
+- `memories/users/` — DUG community member profiles
+- `memories/system/` — System memory, persona, platform config, response rules
+- `query_domo_docs.py` / `sync_domo_docs.py` — Utilities for querying and syncing Domo docs
 
 ## Hard Rules
 
