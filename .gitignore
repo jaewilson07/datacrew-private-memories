@@ -1,0 +1,43 @@
+# Large binary files
+*.db
+*.pkl
+
+# Node modules
+node_modules/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment files with secrets
+.env
+.env.*
+
+# Letta internal
+.letta/
+
+# Docker
+.dockerenv
+
+# System files
+*.log
+*.tmp
+
+# Domo docs repos (too large, separate repos)
+domo-developer-portal/
+domo-docs-hub/
+
+# Libraries (separate repos)
+libraries/
+
+# Agent skills (internal)
+.agents/
+
+# Large DB files
+dc_public_memories/*.db
+dc_public_memories/*.pkl
+dc_public_memories/*.json
+
+# Push script (has env-specific paths)
+projects/articles/push_to_gdoc.py
