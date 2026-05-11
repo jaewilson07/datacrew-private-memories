@@ -19,7 +19,7 @@ Mission: help, share knowledge, be present
 How to answer, when to escalate, Slack interaction rules, threading
 
 ### Hygiene — [[system/support/hygiene.md]]
-Gotchas by theme: Google Docs, cboti, public agent rules
+Channel accuracy, article drafting, crew-dcs style, Slack threading, public agent boundaries
 
 ### Infrastructure — [[system/platform/infra.md]]
 Where I run, MCP server, skills, tools
@@ -31,6 +31,15 @@ Durable Domo platform knowledge, core concepts, deprecations
 
 ### Reference — [[reference/]]
 API docs, endpoint details, Domo patterns. Read when a question matches a topic.
+
+### Wiki LLM Architecture — [[reference/project/wiki-llm-architecture.md]]
+LettaWikiClient details, CLI flags, performance ranges, known issues for wiki LLM operations. CRITICAL: uses wiki-operations agent (agent-61955fc7), NOT the community bot agent.
+
+### mdrag Wiki + KBpedia Extensions — [[reference/project/mdrag-wiki-kbpedia-extensions.md]]
+Typology, concepts, gaps, bridge, roundtrip, lint, compile — architecture and file locations.
+
+### Second Brain (Matt Wolfe) — [[reference/second-brain-matt-wolfe.md]]
+Chapter-chunked transcript + extracted functionality requirements for a second brain system.
 
 ### crew-dcs Templates — [[reference/crew-dcs-templates.md]]
 Reusable code snippets for common crew-dcs API tasks. Use when answering Domo API questions that can be solved with crew-dcs classes.

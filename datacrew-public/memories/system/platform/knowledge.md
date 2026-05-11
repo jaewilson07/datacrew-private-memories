@@ -19,8 +19,13 @@ This file holds durable Domo platform knowledge that's always in context. For de
 
 - **Domo API** — `api.domo.com/v1/...` (datasets, users, pages, etc.)
 - **Domo App API** — for App Studio custom interactions
+- **Lineage API** — `GET /api/data/v1/lineage/{entity_type}/{entity_id}?traverseUp=true&traverseDown=true`
+- **AI Readiness API** — `GET/POST/PUT /api/ai/readiness/v1/data-dictionary/dataset/{dataset_id}`
+- **Page Layout API** — `GET/PUT /api/content/v4/pages/layouts/{layout_id}`
+- **AppStudio API** — `GET/PUT /api/content/v1/dataapps/{appstudio_id}`
 - **See [[reference/domo-api.md]] for endpoint details**
 
 ## Deprecations & Changes
 
+- **Domo has NO auto-arrange API** for dataflow canvas — layout must be computed client-side
 - *(Track known deprecations here as they come up)*

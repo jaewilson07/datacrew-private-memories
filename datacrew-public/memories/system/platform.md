@@ -9,6 +9,12 @@ description: Where I run, what tools I have, and how to use them.
 - **Working directory:** `/workspace/datacrew`
 - **Skills directory:** `/workspace/.agents/skills/` (same skills as datacrew-cloud)
 
+## Scheduled Tasks (Cron)
+
+- `daily-message-backup` — 08:00 UTC daily — Pull new messages from tracked Slack channels → SQLite
+- `doc-sync` — 06:00 UTC daily — Sync Domo docs from GitHub → knowledge store
+- `memory-reflection` — Every 6 hours — Review conversations, detect gaps, lint memory, update files
+
 ## Local Domo Docs Knowledge Store (CHECK FIRST)
 
 - **DB:** `/workspace/dc_public_memories/domo_docs.db` (41.9 MB, 1,919 docs)
@@ -39,27 +45,30 @@ conn.close()
 
 ## DataCrew MCP Server (mdrag)
 
-- **External URL:** `https://mdrag.datacrew.space/mcp/` — **BROKEN**: CF Access service token auth returns 302. Do NOT use for API calls.
-- **Internal URL** (from VPS Docker network): `http://mdrag:8017` — **USE THIS** for all mdrag API calls from the VPS
-- **Health check:** `curl -s http://mdrag:8017/api/v1/health`
-- **Tool list:** `curl -s http://mdrag:8017/api/v1/mcp/tools?tier=primary`
-- **Crawl URL:** `POST http://mdrag:8017/api/v1/crawl/url` with `{"url": "..."}` — **WORKS**, great for pulling Domo docs
-- **Crawl site:** `POST http://mdrag:8017/api/v1/crawl/site` with `{"url": "...", "max_pages": 20}`
-- **RAG query:** `POST http://mdrag:8017/api/v1/query` — **REQUIRES org_id** (unknown which one to use; 77 docs / 1735 chunks exist but can't be queried)
-- **Wiki search:** `GET http://mdrag:8017/api/v1/wiki/search?q=<query>` — returns empty for most queries
-- **Research:** `POST http://mdrag:8017/api/v1/research/run` (requires `topic` + `query`)
+- **External URL:** `https://mdrag.datacrew.space/mcp/` — **WORKS** after CF Access token rotation (2026-05-08)
+- **Internal URL** (from VPS Docker network): `http://mdrag:8017` — also works, no CF Access needed
+- **MCP server ID:** `mcp_server-86434654-eeb4-4e87-8993-bbe8e0db0e3b`
+- **CF Access token:** `mdrag-agent` (CF token ID `506688c4-3270-482a-b6c5-a61606936551`) — rotated 2026-05-08
+- **Health check:** `curl -s http://mdrag:8017/api/v1/health` (77 docs, 1735 chunks)
+- **39 tools discovered**, 10 primary attached to agent
 
-### Primary Tools (5 agent-facing)
+### 10 Primary Tools (attached to agent)
 
 | Tool | Purpose | Status |
 |------|---------|--------|
-| `search_web` | SearXNG search (internal Docker network) | Not tested via HTTP |
-| `crawl_url` | Single-page crawl with two-pass JS detection | **WORKS** — most reliable endpoint |
-| `crawl_site` | BFS deep crawl up to 20 pages, domain-restricted | Not tested |
-| `query_rag` | Knowledge base retrieval (semantic + keyword) | **BLOCKED** — requires unknown org_id |
-| `save_url_to_knowledge` | Ingest URLs into the knowledge base | Not tested |
+| `search_web` | SearXNG web search | ✅ attached |
+| `crawl_url` | Single-page crawl with two-pass JS detection | ✅ attached |
+| `crawl_site` | BFS deep crawl up to 20 pages | ✅ attached |
+| `query_rag` | Knowledge base retrieval (semantic + keyword) | ✅ attached |
+| `save_url_to_knowledge` | Ingest URLs into knowledge base | ✅ attached |
+| `save_text_to_knowledge` | Save raw text to knowledge base | ✅ attached |
+| `query_wiki` | Search the Karpathy wiki | ✅ attached |
+| `compile_wiki` | Compile raw pages into wiki articles | ✅ attached |
+| `research_with_ai` | Delegate research to Deep Thought agent | ✅ attached |
+| `search_graph` | Search the knowledge graph | ✅ attached |
 
-**For Domo questions:** Check local `domo_docs.db` FIRST, then `crawl_url` for live docs, then web search. RAG is currently not queryable.
+**If CF Access fails (302):** rotate `mdrag-agent` service token via CF API, update Infisical, re-register MCP server. See runbook: `libraries/mdrag/.agents/runbooks/cf-access-auth/SKILL.md`
+**For Domo questions:** Check local `domo_docs.db` FIRST, then `query_rag` / `crawl_url`, then web search.
 
 ## Slack API
 
@@ -112,9 +121,54 @@ curl -s "https://slack.com/api/conversations.replies?channel=CH&ts=TS" \
 - **Jae's Slack user ID:** `U0B35MJ9540`
 - **Draft channel:** `C0AQRRBUFPB` (#train-discordbot)
 
+## Git Auth
+
+- **crew-dcs** remote (`hector-dcs/crew-dcs`) is a private repo — requires `HECTOR_GH_PAT` from Infisical (hostinger VPS project, env prod, path `/datacrew`). Set in remote URL as `https://$PAT@github.com/hector-dcs/crew-dcs.git`
+- All other repos use public access or embedded tokens in their remote URLs
+
+## Infisical Access
+
+- **URL**: `https://infisical.datacrew.space`
+- **Project ID**: `de8b26a4-8d69-46fa-bb32-9715ab396d6f`
+- **Org ID**: `e899ebbe-5c41-4d53-b1ce-28cd18db1987`
+- **Auth**: Universal auth (client ID/secret in `/workspace/.env`)
+- **Key secrets**: `DOMO-COMMUNITY_ACCESS_TOKEN`, `POSTMAN_API_KE`, `MDRAG_AGENT_CF_CLIENT_ID/SECRET`, `AUTH_SECRET`, `GDOC_CLIENT`
+- **Login command**: `infisical login --method universal-auth --client-id $ID --client-secret $SECRET --domain https://infisical.datacrew.space --silent`
+- **Fetch secret**: Use API directly with Bearer token (CLI login doesn't persist between commands)
+
+## Domo Community Instance
+
+- **Instance**: `domo-community.domo.com`
+- **Token**: `DOMO-COMMUNITY_ACCESS_TOKEN` from Infisical
+- **Auth class**: `DomoTokenAuth(domo_instance='domo-community', domo_access_token=...)`
+- **User**: Jae Wilson (Admin, id: 1893952720)
+
+## crew-dcs Development
+
+- **Python**: Requires `>=3.13` (installed via uv at `.venv/`, use `export PATH="/root/.local/bin:$PATH"`)
+- **crew-logger (`cl`)**: GitHub repo `hector-dcs/crew-logger` is 404. Mocked at `/tmp/cl_mock/`
+- **Venv**: `.venv/bin/python` with `export PATH="/root/.local/bin:$PATH"`
+- **Route verification**: 290/336 endpoints verified against domo-community (86%)
+- **Pipeline output**: `.agents/runbooks/convert-bryce-apis/scripts/output/`
+
+## crew-dcs Optimization Modules (2026-05-10)
+
+- **`DomoDataflow/layout_optimizer.py`** — topological layout, color standardization, auto-sectioning
+- **`DomoAppStudio/styling_optimizer.py`** — 4 presets (MINIMAL_LIGHT, MINIMAL_DARK, EXECUTIVE, DENSE), `optimize_app()`, `apply_style()`
+- **`DomoDataset/ai_readiness_lineage.py`** — lineage auto-fill for AI Readiness context, `populate_from_lineage()`
+- **Key APIs:** Lineage `GET /api/data/v1/lineage/{entity_type}/{entity_id}`, AI Readiness `GET/POST/PUT /api/ai/readiness/v1/data-dictionary/dataset/{dataset_id}`, Page Layout `GET/PUT /api/content/v4/pages/layouts/{layout_id}`
+- **Domo has NO auto-arrange API** for dataflow canvas — layout must be computed client-side
+
 ## Key Notes
 
 - This is a **public-facing agent** — everything I do should be appropriate for a community Slack channel
-- I have access to the DataCrew knowledge base via mdrag, but RAG queries are blocked by an unknown org_id requirement. Use `crawl_url` to pull Domo docs directly instead.
-- I do NOT have access to Infisical secrets, private client data, or internal business tools
+- I have access to the DataCrew knowledge base via mdrag (10 primary MCP tools attached, CF Access token rotated 2026-05-08)
+- I have access to Infisical secrets via machine identity (client ID/secret in `/workspace/.env`)
 - **Python packages:** numpy, scikit-learn, scipy available (installed via apt). No pip — use `apt-get install python3-<package>` for new packages
+
+## Domo Python Libraries — Know the Difference
+
+- **PyDomo** (`pip3 install pydomo`) — Domo's official Python SDK. Sync, dict-based, limited API coverage (datasets, PDP, users, groups, pages, streams, accounts). OAuth client-credentials auth.
+- **crew-dcs / domoLibrary** — DataCrew's async Python library. Class-based (`DomoDataset`, `DomoCard`, `DomoPage`, `DomoDataflow`, `DomoGroup`), token auth (`DomoTokenAuth`), broader API coverage including dataflows and cards. The original name was "crew-dcs"; it was later renamed to "domoLibrary."
+- **domo_python** (`pip install domo_python`) — Community package by Brock Cooper. Simple sync wrapper focused on data import/export + SFTP. Last updated 2018.
+- **When someone asks about "domoLibrary" they mean crew-dcs/domoLibrary, NOT PyDomo**
