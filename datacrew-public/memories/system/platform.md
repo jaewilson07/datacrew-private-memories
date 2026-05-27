@@ -45,12 +45,13 @@ conn.close()
 
 ## DataCrew MCP Server (mdrag)
 
-- **External URL:** `https://mdrag.datacrew.space/mcp/` — **WORKS** after CF Access token rotation (2026-05-08)
-- **Internal URL** (from VPS Docker network): `http://mdrag:8017` — also works, no CF Access needed
+- **External URL:** `https://wikki.datacrew.space/mcp` — unified gateway (2026-05-27)
+- **Auth:** `Authorization: Bearer dc_<token>` — dc_ JWT from `datacrew.space/account`
+- **Internal URL** (from VPS Docker network): `http://mdrag:8017` — use `X-Internal-Secret` header for auth bypass
 - **MCP server ID:** `mcp_server-86434654-eeb4-4e87-8993-bbe8e0db0e3b`
-- **CF Access token:** `mdrag-agent` (CF token ID `506688c4-3270-482a-b6c5-a61606936551`) — rotated 2026-05-08
-- **Health check:** `curl -s http://mdrag:8017/api/v1/health` (77 docs, 1735 chunks)
-- **39 tools discovered**, 10 primary attached to agent
+- **Health check:** `curl -s http://mdrag:8017/api/v1/health`
+- **41 tools discovered**, 10 primary attached to agent
+- **Retired:** `mdrag.datacrew.space` (301 → wikki.datacrew.space), CF Access tokens removed
 
 ### 10 Primary Tools (attached to agent)
 
