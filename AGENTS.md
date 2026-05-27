@@ -45,7 +45,8 @@ Key patterns:
 ### mdrag (`libraries/mdrag/`)
 
 DataCrew MCP server — web search, crawl, RAG, knowledge management.
-Available at `https://mdrag.datacrew.space/mcp/` (36 tools).
+Available at `https://wikki.datacrew.space/mcp` (41 tools, `dc_` JWT auth).
+Auth: `Authorization: Bearer dc_<token>` — get a token at `datacrew.space/account`.
 
 Primary agent-facing tools:
 - `search_web` — SearXNG search
