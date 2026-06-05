@@ -24,36 +24,60 @@ Run the job search scoring pipeline and post a digest of top results to Slack.
 
 ### Step 1: Verify environment
 
-Ensure required env vars are set. The pipeline reads from `datacrew/.env`:
+Confirm required env vars are set in the **current shell** (not in .env files — the pipeline reads from the environment directly):
 
 ```bash
-# Check key vars exist
-grep DATACREW_SLACK_BOT_TOKEN /workspace/datacrew/.env | head -1
-grep OLLAMA_BASE_URL /workspace/datacrew/.env | head -1
+# Check Slack token — accepts either name
+echo "${DATACREW_SLACK_BOT_TOKEN:-${JOB_SEARCH_SLACK_BOT_TOKEN:-MISSING}}" | cut -c1-12
+
+# Confirm Ollama is reachable (default endpoint is hardcoded in the script)
+curl -s --connect-timeout 5 http://ollama.jaewilson07.twingate.com:11434/api/tags | python3 -c "import json,sys; tags=json.load(sys.stdin); print([m['name'] for m in tags.get('models',[])])" 2>&1 | head -1
 ```
 
-If `OLLAMA_BASE_URL` is not set, default to `http://ollama.jaewilson07.twingate.com:11434`.
+If Ollama is unreachable, stop — L2 scoring requires the local GPU endpoint via Twingate.
 
-### Step 2: Run the scoring pipeline
+### Step 2: Scrape fresh jobs (run once per day or if DB is stale)
+
+`run_scoring.py` reads from the local DB (`data/EXPORTS/job_search.db`). It only needs to be
+populated once per day. Skip this step if you can confirm the DB was scraped today.
 
 ```bash
 cd /workspace/datacrew/projects/job-search
 
+# Check when the DB was last populated
+.venv/bin/python3 -c "
+import sqlite3; conn=sqlite3.connect('data/EXPORTS/job_search.db')
+cur=conn.cursor(); cur.execute('SELECT COUNT(*), MAX(fetched_at) FROM jobs')
+count, latest = cur.fetchone(); print(f'Jobs: {count}, latest: {latest}')
+"
+
+# If more than 24 hours old, scrape fresh data (takes ~8 min)
 JOB_SEARCH_SLACK_BOT_TOKEN=$DATACREW_SLACK_BOT_TOKEN \
-JOB_SEARCH_SLACK_CHANNEL_ID=C0B23VA3CJY \
 PYTHONPATH=src:/workspace/datacrew \
-.venv/bin/python3 run_scoring.py --yolo
+.venv/bin/python3 -m job_search 2>&1 | tail -5
 ```
 
-The `--yolo` flag enables autonomous execution — no approval needed per step.
+The scrape step may fail at the Google Sheets sync at the end (if GDOC credentials aren't set) —
+that's OK, all job data is saved to the DB before that step.
 
-**What the pipeline does:**
-1. **Scrape** — Pull recent jobs from configured sources (7-day window)
-2. **L1 (KeywordScorer)** — Fast regex filter: seniority + hard_blocks cut noise
-3. **L2 (LettaScorer w/ Ollama backend)** — Local LLM scoring via `gemma3:12b` at the Ollama endpoint
-4. **Post** — Format top results and post to Slack via `SlackJobPoster`
+### Step 3: Run the scoring pipeline
 
-### Step 3: Verify Slack post
+```bash
+cd /workspace/datacrew/projects/job-search
+
+DATACREW_SLACK_BOT_TOKEN=$DATACREW_SLACK_BOT_TOKEN \
+JOB_SEARCH_SLACK_CHANNEL_ID=C0B23VA3CJY \
+PYTHONPATH=src:/workspace/datacrew \
+.venv/bin/python3 run_scoring.py
+```
+
+**What `run_scoring.py` does (reads DB, does NOT scrape):**
+1. **L1 (KeywordScorer)** — Fast regex filter: seniority + hard_blocks cut noise
+2. **L2 (LettaScorer w/ Ollama backend)** — Local LLM scoring via `qwen3.5:9b`
+3. **L3 (LettaScorer via Letta Cloud)** — Apply-worthy ranking (skipped if no agent ID)
+4. **Post** — Format results into tiered Slack digest (high/mid tier threads)
+
+### Step 4: Verify Slack post
 
 After the pipeline completes, confirm the digest was posted to `#datacrew-customer-outreach` (C0B23VA3CJY).
 
@@ -67,11 +91,11 @@ JOB_SEARCH_SLACK_CHANNEL_ID=C0B23VA3CJY \
 PYTHONPATH=src:/workspace/datacrew \
 .venv/bin/python3 run_scoring.py --yolo
 
-# Score only (no Slack post)
-JOB_SEARCH_SLACK_BOT_TOKEN=$DATACREW_SLACK_BOT_TOKEN \
-JOB_SEARCH_SLACK_CHANNEL_ID=C0B23VA3CJY \
-PYTHONPATH=src:/workspace/datacrew \
-.venv/bin/python3 run_scoring.py --yolo --no-post
+# Score only (no Slack post) — not yet supported; comment out the Slack posting block manually if needed
+# DATACREW_SLACK_BOT_TOKEN=$DATACREW_SLACK_BOT_TOKEN \
+# JOB_SEARCH_SLACK_CHANNEL_ID=C0B23VA3CJY \
+# PYTHONPATH=src:/workspace/datacrew \
+# .venv/bin/python3 run_scoring.py
 ```
 
 ## Pipeline Architecture
@@ -79,7 +103,7 @@ PYTHONPATH=src:/workspace/datacrew \
 | Layer | Scorer | Method | Speed |
 |-------|--------|--------|-------|
 | L1 | KeywordScorer | Regex: seniority + hard_blocks | Fast |
-| L2 | LettaScorer (Ollama backend) | Local LLM (`gemma3:12b`) | ~30s/job |
+| L2 | LettaScorer (Ollama backend) | Local LLM (`qwen3.5:9b`, set in `datacrew/config.yaml`) | ~30s/job |
 | L3 | LettaScorer | Letta API (fallback, credits exhausted) | N/A |
 
 **Profile:** `profiles/jae-consultant-fte.yaml`
@@ -113,8 +137,7 @@ PYTHONPATH=src:/workspace/datacrew \
 - **Post to `C0B23VA3CJY`** — NOT `C0AR7M4M0V9` (old channel)
 - **Empty `seniority: []` in profile causes noise** — always validate the profile has meaningful filters (gotcha #73)
 - **L3 LettaScorer credits exhausted** — don't enable unless credits are refreshed
-- **Ollama must be reachable** — check `http://ollama.jaewilson07.twingate.com:11434` before running
-- **VPS can't run Ollama** — L2 scoring requires the local GPU endpoint via Twingate
+- **Ollama must be reachable before running** — Step 1 checks this; if curl fails, stop (VPS can't reach it — L2 requires the local GPU via Twingate)
 - **sentence-transformers removed** — no more OOM/disk-full failures from torch
 - **Use `.venv/bin/python3` directly** — NOT `uv run` (30+ sec resolver overhead)
 
