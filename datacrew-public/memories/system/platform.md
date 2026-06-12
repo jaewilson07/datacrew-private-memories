@@ -68,7 +68,7 @@ conn.close()
 | `research_with_ai` | Delegate research to Deep Thought agent | ✅ attached |
 | `search_graph` | Search the knowledge graph | ✅ attached |
 
-**If CF Access fails (302):** rotate `mdrag-agent` service token via CF API, update Infisical, re-register MCP server. See runbook: `libraries/mdrag/.agents/runbooks/cf-access-auth/SKILL.md`
+**If auth fails (401/403):** generate a new `dc_` token at `https://datacrew.space/account`, update wherever it's stored, and re-register the MCP server with the new Bearer header. (CF Access is retired — `mdrag.datacrew.space` 301-redirects to `wikki.datacrew.space`.)
 **For Domo questions:** Check local `domo_docs.db` FIRST, then `query_rag` / `crawl_url`, then web search.
 
 ## Slack API
@@ -76,6 +76,29 @@ conn.close()
 - **Bot token env var:** `PUBLIC_DATACREW_SLACK_BOT_TOKEN`
 - **App token env var:** `PUBLIC_DATACREW_SLACK_APP_TOKEN`
 - **Do NOT use** `$SLACK_BOT_TOKEN` (not set) — use `$PUBLIC_DATACREW_SLACK_BOT_TOKEN`
+
+## Sending a Voice Message / Voice Memo
+
+I CAN reply with audio. Slack has no native voice-memo API, but I can synthesise
+speech and upload it as an mp3 that Slack renders as an **inline audio player** —
+functionally a voice message. One command (the `send-voice-to-slack` runbook):
+
+```bash
+python3 /workspace/datacrew/.agents/runbooks/send-voice-to-slack/scripts/main.py \
+  --text "<what to say>" \
+  --channel "<channel id>" \
+  --thread-ts "<ts of the message I'm replying to>"
+```
+
+- Use for: "send a voice message", "reply with audio", "send a voice memo",
+  "say that out loud", "voice reply".
+- Defaults to the **DataCrew voice** (Fish Speech S2, `--voice alix`) and the
+  community token `PUBLIC_DATACREW_SLACK_BOT_TOKEN` — both correct for the
+  public DUG workspace, so I don't pass `--bot-token-env`.
+- Always pass `--thread-ts` when replying in a thread.
+- If TTS is unreachable, the script errors clearly — I surface that and reply
+  with text meanwhile; I NEVER substitute a different voice.
+- Full guide + flags: `/workspace/datacrew/.agents/runbooks/send-voice-to-slack/SKILL.md`
 
 ## Skills Available
 
