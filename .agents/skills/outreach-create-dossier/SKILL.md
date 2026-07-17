@@ -118,6 +118,64 @@ Report back to user:
 - Number of contacts synced
 - Whether it was new or an update
 
+### Step 7: Write to Memory Store
+
+**Goal:** Persist a structured client memory in the shared memory store so future sessions can recall it.
+
+After the dossier is created, write (or update) a memory file at:
+
+```
+/home/jaewilson07/GitHub/datacrew-private-memories/agents/datacrew/clients/<slug>.md
+```
+
+**Format** (YAML frontmatter + structured content):
+
+```markdown
+---
+description: <Company Name> — customer dossier, key people, Domo connection, outreach status.
+---
+# <Company Name> — Customer Dossier
+
+**Created:** <YYYY-MM-DD>
+**Dossier URL:** <Google Doc URL>
+**Tracker status:** <status from Prospect Tracker>
+
+## Company Overview
+<1-2 paragraph summary: what they do, industry, size, Domo relationship>
+
+## Key People
+- **<Name>** — <title>, <role in Domo context>
+- ...
+
+## Domo Connection
+<how they use Domo, what products, tier, use case>
+
+## Outreach Strategy
+<per-persona outreach status: drafted, sent, responded>
+
+## Links
+- Dossier: <Google Doc URL>
+- Tracker: <Prospect Tracker row>
+- [[agents/datacrew/clients/<slug>]] — this file
+```
+
+**Rules:**
+- Use kebab-case for the slug (e.g., `manulife`, `layton-construction`)
+- If a file already exists for this client, **update it** — don't create a duplicate
+- Pull before writing and push after (shared repo is collaborative)
+- Include `[[path]]` cross-references to related clients or reference docs where relevant
+- Never put client financial details, rates, or pipeline info in shared directories — only in `agents/datacrew/clients/`
+
+```bash
+# Pull latest, write the file, commit and push
+cd /home/jaewilson07/GitHub/datacrew-private-memories
+git pull
+# ... write/update agents/datacrew/clients/<slug>.md ...
+git add agents/datacrew/clients/<slug>.md
+git commit -m "feat: customer dossier for <Company Name> (<YYYY-MM-DD>)"
+git push
+```
+
 ## CLI Commands (quick reference)
 
 ```bash

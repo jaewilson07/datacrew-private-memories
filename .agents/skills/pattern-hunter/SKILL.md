@@ -234,6 +234,65 @@ uv run python .agents/skills/pattern-hunter/scripts/ingest_to_kb.py \
 - Neo4j `Map{}` error on ingest is a pre-existing mdrag bug — MongoDB ingest succeeds; ignore it
 - GDoc creds: `GDOC_CLIENT` + `GDOC_TOKEN` at `/datacrew` path in homeserver Infisical project
 
+### Node 6: Write to Memory Store
+
+**Goal:** Persist a structured client memory in the shared memory store so future sessions can recall it.
+
+After the brief is produced, write (or update) a memory file at:
+
+```
+/home/jaewilson07/GitHub/datacrew-private-memories/agents/datacrew/clients/<slug>.md
+```
+
+**Format** (YAML frontmatter + structured content):
+
+```markdown
+---
+description: <Operator Name> — Pattern Hunter brief summary, pain points, and recommended fixes.
+---
+# <Operator Name> — Pattern Hunter Brief
+
+**Generated:** <YYYY-MM-DD>
+**Source:** Pattern Hunter run on <business type or URL>
+**Full brief:** EXPORTS/<slug>-brief-<date>.md
+
+## Industry Snapshot
+<1-2 paragraph summary from Node 1>
+
+## Top Pain Points
+<bullet list of top 3-5 pain points from Node 2>
+
+## Hypotheses
+<2-3 hypothesis summaries with done-for-you asset references>
+
+## Red Team Notes
+<key risks/fears addressed, anything cut and why>
+
+## Links
+- GDoc tab: <link if created>
+- mdrag KB: <link if ingested>
+- [[agents/datacrew/clients/<slug>]] — this file
+```
+
+**Rules:**
+- Use kebab-case for the slug (e.g., `blueyeti`, `trailer-rental-co`)
+- If a file already exists for this client, **update it** — don't create a duplicate
+- Pull before writing and push after (shared repo is collaborative)
+- Include `[[path]]` cross-references to related clients or reference docs where relevant
+- Never put client financial details, rates, or pipeline info in shared directories — only in `agents/datacrew/clients/`
+
+```bash
+# Pull latest, write the file, commit and push
+cd /home/jaewilson07/GitHub/datacrew-private-memories
+git pull
+# ... write/update agents/datacrew/clients/<slug>.md ...
+git add agents/datacrew/clients/<slug>.md
+git commit -m "feat: pattern hunter brief for <Operator Name> (<YYYY-MM-DD>)"
+git push
+```
+
+---
+
 ## References
 
 - **[references/source-guide.md](./references/source-guide.md)** — Reddit subs, association sites, and search patterns by industry vertical
