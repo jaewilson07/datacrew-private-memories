@@ -286,7 +286,7 @@ If you look at it and say 'I'd use this every day,' we talk about building it fo
 
 ### What This Guide Does NOT Do (By Design)
 - **Leadership/People/Culture assessment** (Wipfli components 2-4): Not relevant for a KPI/OKR + Domo engagement. That's organizational development.
-- **Benchmarking against industry peers:** Wipfli has 54K clients' worth of data. Directional benchmarks from research only.
+- **Benchmarking against industry peers:** Wipfli has 54K clients' worth of data. Partially addressed via external benchmark sources (see Benchmark Sources section below). APQC OSB membership recommended for full peer-comparable benchmarking.
 - **Workshop facilitation:** Post-assessment phase. The interview comes first.
 - **Multi-stakeholder interviews:** The Assignment requests a 10-minute call with the operations person, but the main interview is with the CFO. Wipfli would do 6+ executive interviews. This is a narrower engagement.
 
@@ -298,3 +298,35 @@ If you look at it and say 'I'd use this every day,' we talk about building it fo
 5. Operational Excellence → Stages 2, 4 (well covered)
 6. Strong Financial Foundation → Stage 2, KPI selection (well covered)
 7. Technology Optimization → Stage 3 (Data Source Mapping) — added after comparison
+
+## Benchmark Sources (A&D Supply Chain)
+
+### Tier 1: Publicly Available (Use Now)
+- **AlixPartners** — Actual A&D inventory turnover quartile benchmarks:
+  - 2022 median: 3.2x (down from 3.7x in 2018)
+  - Top quartile (best-in-class): >4.1x (was >5.2x pre-crisis)
+  - Bottom quartile: ~2.3x
+  - 2025 update: middle pack 2.5-3.5x (from 4-4.5x); bottom quartile ~1x
+  - $75B excess inventory across 59 A&D companies (2018-2025)
+  - 70% of aircraft OEM inventory is WIP on Final Assembly Line
+  - At 6% financing cost: $4.5B/year in unnecessary interest
+- **McKinsey** — Directional: A&D carries 2x+ inventory vs industrial peers; 20-30% reduction opportunities in commercial aerospace; 50%+ in defense
+- **Kinaxis/Supply Chain Insights** — C2C cycle up 60% (2000-2012), inventory turns down 33%
+- **DoD/DTIC** — SCOR-based scorecard for defense supply chains (perfect order fulfillment, fill rate definitions)
+
+### Tier 2: Membership Required (Consider for Ongoing Practice)
+- **APQC Open Standards Benchmarking (OSB)** — World's largest database of process measures. Submit client data, get blinded peer comparison within 2 weeks. Includes: cash-to-cash cycle time, finished goods inventory turns, perfect order performance, customer retention rate, forecast error (MAPE), order fill rate, total cost of supply chain function per sales order. Industry-specific benchmarks including Government/Military. This is the closest equivalent to Wipfli's proprietary benchmarking.
+- **Gartner** — Dynamic supply chain benchmarking database, 7 core process areas. Paid service. A&D falls under "industrial" filter, not A&D-specific.
+- **SCOR/ASCM** — Benchmark database with percentile-based targets (Superior = 90th percentile, Advantage = midpoint, Parity = median). Standardized metric definitions for Perfect Order Fulfillment (RL.1.1), Fill Rate (RL.3.36), Order Fulfillment Cycle Time (RS.1.1).
+
+### Tier 3: Framework (Use for Credibility and Structure)
+- **SCOR Model** — Industry-standard metric hierarchy. Use definitions and structure even without benchmark database access. Level 1 (strategic KPIs) → Level 2 (component metrics) → Level 3 (diagnostics). Five performance attributes: Reliability, Responsiveness, Agility, Cost, Asset Management Efficiency.
+
+### Not Useful for Our Purposes
+- **Dresner Advisory Services** — BI market adoption studies, not operational KPI benchmarks. Wrong kind of data.
+- **HBR** — Articles and case studies, not a benchmark database.
+
+### Benchmarking Strategy for the Practice
+1. **First engagement (Blue Raven):** Use AlixPartners + McKinsey + Kinaxis as directional benchmarks. "Your inventory turnover is X. Industry median is 3.2x. Best-in-class is 4.1x."
+2. **Ongoing practice:** Join APQC OSB. Submit each client's data, get peer comparisons. This is how we compete with Wipfli's benchmarking without 54K clients.
+3. **Long-term:** Compounding loop. Each engagement's close-out adds to our own benchmark database. Over time, our own data becomes the differentiator.
