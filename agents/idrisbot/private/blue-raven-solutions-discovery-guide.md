@@ -67,7 +67,9 @@
 
 ---
 
-## The Interview Flow (5 stages, ~35 minutes)
+## The Interview Flow (6 stages, ~45 minutes)
+
+*Updated after Wipfli Prime Growth System comparison — added Stage 3: Data Source Mapping and KPI Feasibility Matrix to address the Domo implementation requirement.*
 
 ### Stage 1: Context Setting (5 min)
 **Goal:** Warm up, understand the business model, establish rapport.
@@ -96,7 +98,26 @@
 
 ---
 
-### Stage 3: The Gap — What's Costing You (10 min)
+### Stage 3: Data Source Mapping (10 min) — NEW
+**Goal:** Understand what data exists, where it lives, what format it's in, and whether Domo can connect to it. This is the bridge between the interview and the Domo implementation.
+**Wipfli Parallel:** Component 7 (Technology Optimization and Alignment) — "We work to understand all existing data sources."
+
+**Questions:**
+1. "What ERP or inventory management system do you use? NetSuite? SAP? Dynamics? QuickBooks? Something else?"
+2. "SEDNA — what data goes in, what comes out, and can it be accessed via API or export? Is it a SaaS platform or on-prem?"
+3. "Financial system — what do you use for AR, AP, general ledger? Same as the ERP or separate?"
+4. "Do you have a CRM? How do you track customer orders and pipeline?"
+5. "Where does inventory data live? Warehouse management system? Spreadsheets? SEDNA?"
+6. "If I needed to build a dashboard showing cash-to-cash cycle, could you give me AR aging, AP aging, and inventory levels by SKU? In what format? CSV export? API? Manual pull?"
+7. "If I needed fill rate, do you have order data and shipment data? Where? Can they be joined?"
+8. "If I needed DMSMS risk exposure, do you have parts data with manufacturer EOL dates? Or would we need to source that externally?"
+9. "What's manual vs. automated? What's in someone's head vs. in a system? What's in a spreadsheet that should be in a system?"
+
+**STOP Gate 3:** "So your data sources are [list systems]. The KPIs we can calculate from existing data right now are [list]. The KPIs that need new data collection or manual entry are [list]. Right?"
+
+---
+
+### Stage 4: The Gap — What's Costing You (10 min)
 **Goal:** Surface the pain. What decisions are they making blind?
 **Forcing Question:** Q4 (Narrowest Wedge)
 
@@ -107,11 +128,11 @@
 4. "Aircraft-on-ground events — when a customer needs a part to keep a fleet flying. How do you track your response time? What's the cost of an AOG you can't fulfill — both the lost revenue and the relationship damage?"
 5. "Defense supply chain means a few large customers. What's your customer concentration? If your top customer cut orders by 50% next quarter, how fast would you know — and what would give you advance warning?"
 
-**STOP Gate 3:** "The three biggest gaps I'm hearing are: [list]. The one that costs you the most is [pick one]. Is that right? Or is there something else you're not telling me?"
+**STOP Gate 4:** "The three biggest gaps I'm hearing are: [list]. The one that costs you the most is [pick one]. Is that right? Or is there something else you're not telling me?"
 
 ---
 
-### Stage 4: Strategic Priority (5 min)
+### Stage 5: Strategic Priority (5 min)
 **Goal:** What's the engagement type? Growth, optimization, or preparation?
 
 **Questions:**
@@ -119,11 +140,11 @@
 2. "If this engagement only does one thing for you, what would make you say 'that was worth every penny'? Not a list — one thing."
 3. "You're a CFO. You've been at Deloitte, GE, Aquatrols. You know what good financial reporting looks like. What's the gap between what you have now and what you'd want if you were reporting to a board or preparing for an audit?"
 
-**STOP Gate 4:** "So the priority is [pick one: growth/optimization/preparation]. The success metric for this engagement is [one thing]. Everything else is secondary. Agreed?"
+**STOP Gate 5:** "So the priority is [pick one: growth/optimization/preparation]. The success metric for this engagement is [one thing]. Everything else is secondary. Agreed?"
 
 ---
 
-### Stage 5: Future-Fit (5 min)
+### Stage 6: Future-Fit (5 min)
 **Goal:** What happens when the world changes?
 **Forcing Question:** Q6 (Future-Fit)
 
@@ -131,7 +152,7 @@
 1. "Defense procurement is shifting — reshoring, budget reallocation, CMMC compliance. Which of your current metrics will matter MORE in 3 years, and which will matter less?"
 2. "If you doubled in size in 18 months — new contracts, new divisions, new people — what would break first? Your data, your processes, or your people?"
 
-**STOP Gate 5:** "Here's what I've got: [full summary]. Here's what I think matters most: [the one thing]. Before I go design KPIs and OKRs, is there anything I'm missing? Anything you didn't say because you thought I wouldn't understand?"
+**STOP Gate 6:** "Here's what I've got: [full summary]. Here's what I think matters most: [the one thing]. Before I go design KPIs and OKRs, is there anything I'm missing? Anything you didn't say because you thought I wouldn't understand?"
 
 ---
 
@@ -144,6 +165,30 @@ After the interview, present these as falsifiable statements. Ryan must agree or
 2. "You're managing obsolescence risk reactively, not proactively — you find out a part is going out of production when a customer needs it, not before." — Agree/Disagree?
 3. "Customer concentration is the #1 existential risk to the business, and you don't have a leading indicator that would tell you if a major customer is pulling back." — Agree/Disagree?
 4. "At 20-30 people, your biggest constraint isn't data — it's decision speed. You need fewer, better metrics that you can act on daily, not a comprehensive dashboard that takes a week to digest." — Agree/Disagree?
+
+---
+
+## Post-Interview: KPI Feasibility Matrix — NEW
+
+For each candidate KPI from the alternatives, score against 4 dimensions to determine implementability in Domo.
+
+**Scoring:** 1 (no data / not accessible) to 5 (real-time API, clean, Domo-ready)
+
+| KPI | Data Source | Format | Quality | Domo Connectable? | Feasibility Score | Effort |
+|---|---|---|---|---|---|---|
+| Cash-to-Cash Cycle | ? (AR + AP + Inventory from ERP?) | ? | ? | ? | ? / 20 | ? |
+| Fill Rate | ? (Orders + Shipments from ERP?) | ? | ? | ? | ? / 20 | ? |
+| Inventory Turnover | ? (Inventory from ERP?) | ? | ? | ? | ? / 20 | ? |
+| Customer Concentration | ? (Revenue by customer from ERP/CRM?) | ? | ? | ? | ? / 20 | ? |
+| DMSMS Risk Exposure | ? (Parts data + EOL dates — exists?) | ? | ? | ? | ? / 20 | ? |
+
+**Interpretation:**
+- **Score 16-20:** Ship immediately. Data exists, is accessible, and Domo can connect.
+- **Score 11-15:** Ship with minor data work. May need a new connector, data cleaning, or manual export.
+- **Score 6-10:** Needs data infrastructure work before KPI is measurable. Flag as Phase 2.
+- **Score 1-5:** Aspirational. Data doesn't exist or isn't accessible. Flag as Phase 3 or drop.
+
+**Output:** A prioritized implementation roadmap based on data feasibility, not just business priority. The KPIs with the highest feasibility scores go into Domo first — even if they're not the most strategically important — because they prove value quickly and build momentum.
 
 ---
 
@@ -198,17 +243,58 @@ Don't track YOUR KPIs — track your CUSTOMERS' KPIs and become their data layer
 
 ## The Assignment
 
-After the interview, the next step is NOT to build the dashboard. It's one action:
+After the interview, the next step is NOT to build the dashboard. It's three concrete actions:
 
-"Ryan, send me your last 3 months of inventory data — whatever format you have it in. I'll come back in 48 hours with a mockup of what your top 5 KPIs would look like if they were real. If you look at it and say 'I'd use this every day,' we talk about building it for real. If you say 'nice but not what I need,' we've wasted 48 hours, not 3 months."
+"Ryan, I need three things:
+
+1. **A system list** — every system you use (ERP, inventory, financial, CRM, SEDNA, spreadsheets). For each, tell me: what data it holds, what format it exports, and whether it has an API.
+
+2. **Sample data** — your last 3 months of data from whatever system holds your inventory and financials. Whatever format you have it in — CSV, Excel, PDF, doesn't matter.
+
+3. **A 10-minute call with your operations person** — not you. The person who actually handles inventory and orders day-to-day. I need to ask them what data exists on the warehouse floor that doesn't make it to your desk.
+
+I'll come back in 48 hours with two things:
+- A **KPI Feasibility Matrix** showing which of the 5-10 KPIs we can measure right now from existing data vs. which need data work first
+- A **mockup** of what your top 5 KPIs would look like in Domo, using your actual data
+
+If you look at it and say 'I'd use this every day,' we talk about building it for real. If you say 'nice but not what I need,' we've wasted 48 hours, not 3 months."
 
 ---
 
 ## Methodology Notes
 
 - **Forcing Questions Used:** Q2 (Status Quo), Q4 (Narrowest Wedge), Q6 (Future-Fit) — smart routing for a company with paying customers
-- **STOP Gates:** 5 gates, one after each stage
+- **STOP Gates:** 6 gates, one after each stage
 - **Premise Challenge:** 4 falsifiable premises presented after interview
+- **KPI Feasibility Matrix:** NEW — maps each candidate KPI to data source, scores feasibility, produces prioritized implementation roadmap
 - **Alternatives Generation:** 3 approaches (minimal viable, ideal architecture, creative/lateral)
 - **Industry Scaffolding:** A&D-specific KPIs from research (C2C, DMSMS, AOG, fill rate, customer concentration)
-- **Artifact Handoff:** This interview guide → KPI/OKR design document → Domo dashboard mockup → implementation plan
+- **Wipfli Comparison:** Added Stage 3 (Data Source Mapping) and KPI Feasibility Matrix after comparing to Wipfli's Prime Growth System — specifically Component 7 (Technology Optimization and Alignment) and their "understand all existing data sources" methodology
+- **Artifact Handoff:** This interview guide → KPI Feasibility Matrix → KPI/OKR design document → Domo dashboard mockup → implementation plan
+
+## Wipfli Prime Growth System Comparison
+
+### What This Guide Does That Wipfli Would Do
+- Structured assessment with stages (Wipfli: Prime Rapid Assessment)
+- Industry-specific knowledge (Wipfli: industry-specific assessment modules)
+- Gap identification (Wipfli: "identify gaps, misalignments, opportunities")
+- Executive conversation first (Wipfli: "starts with a conversation with your executive team")
+- Roadmap/recommendations (Wipfli: "collaborate on a prime roadmap")
+- Operational excellence focus (Wipfli: Component 5)
+- Financial foundation focus (Wipfli: Component 6)
+- Data source mapping (Wipfli: Component 7 — "understand all existing data sources")
+
+### What This Guide Does NOT Do (By Design)
+- **Leadership/People/Culture assessment** (Wipfli components 2-4): Not relevant for a KPI/OKR + Domo engagement. That's organizational development.
+- **Benchmarking against industry peers:** Wipfli has 54K clients' worth of data. Directional benchmarks from research only.
+- **Workshop facilitation:** Post-assessment phase. The interview comes first.
+- **Multi-stakeholder interviews:** The Assignment requests a 10-minute call with the operations person, but the main interview is with the CFO. Wipfli would do 6+ executive interviews. This is a narrower engagement.
+
+### Wipfli's Seven Components (for reference)
+1. Compelling Vision and Plan → Stage 5 (Strategic Priority)
+2. Transformational Leadership → Not covered (org development)
+3. Engaged People → Not covered (org development)
+4. Brand Messaging → Not covered (not relevant)
+5. Operational Excellence → Stages 2, 4 (well covered)
+6. Strong Financial Foundation → Stage 2, KPI selection (well covered)
+7. Technology Optimization → Stage 3 (Data Source Mapping) — added after comparison
