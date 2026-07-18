@@ -1,0 +1,388 @@
+{
+  "industry": "Aerospace & Defense Supply Chain Distribution",
+  "naics_codes": ["423610", "334419", "336414", "928120"],
+  "compiled_date": "2026-07-18",
+  "compiled_by": "IdrisBot (industry-analysis skill v1)",
+  "research_method": "web_search + fetch_webpage across 10 source categories",
+  "sources_searched": [
+    {"category": "General web search", "queries": ["aerospace defense supply chain KPIs metrics 2025 2026"], "results_used": 3},
+    {"category": "Consulting firm reports", "sources": ["AlixPartners", "Deloitte Insights", "Roland Berger", "Kearney"], "results_used": 5},
+    {"category": "Benchmark databases", "sources": ["APQC OSB", "SCOR Model (ASCM v14.0)"], "results_used": 4},
+    {"category": "Trade associations", "sources": ["AIA (Aerospace Industries Association)"], "results_used": 2},
+    {"category": "Financial/SEC filings", "sources": ["AlixPartners (uses S&P Capital IQ from public filings of 59 A&D companies)"], "results_used": 1},
+    {"category": "Industry trade publications", "sources": ["Aviation Week (via Deloitte reference)"], "results_used": 1},
+    {"category": "Government/regulatory", "sources": ["DoD Manual 4140.01 Vol 3 (DMSMS, materiel sourcing, counterfeit avoidance)"], "results_used": 1},
+    {"category": "Market research firms", "sources": ["IDC (via Deloitte reference: A&D AI spending forecast)"], "results_used": 1},
+    {"category": "Academic/research", "sources": ["ASCM SCOR Digital Standard 2025"], "results_used": 1},
+    {"category": "News & current events", "sources": ["AIA 2026 legislative priorities", "Defense contracting EO (Jan 2026)"], "results_used": 2}
+  ],
+  "industry_overview": {
+    "description": "Aerospace & defense supply chain distribution encompasses sourcing, distribution, obsolescence management (DMSMS), counterfeit avoidance, kitting, and logistics for government, defense, and commercial aviation customers. The industry is characterized by few large customers (high concentration), long lead times, strict regulatory compliance (ITAR, DFARS, CMMC), and significant working capital tied up in inventory.",
+    "market_size": "Global A&D industry employs 2.2M workers in the US alone (AIA). US A&D spending on AI/genAI expected to reach $5.8B by 2029 (IDC, via Deloitte).",
+    "key_segments": ["Commercial aerospace OEMs", "Defense primes", "Tier 1-3 suppliers", "MRO (maintenance, repair, overhaul)", "Distributors (e.g., Blue Raven Solutions)", "Aftermarket services"],
+    "industry_structure": "Consolidated at top (few primes: Boeing, Lockheed, Raytheon, Northrop, GD), fragmented at lower tiers. Distributors sit between OEMs/primes and end customers, managing sourcing, obsolescence, and kitting."
+  },
+  "top_10_problems": [
+    {
+      "rank": 1,
+      "problem": "Excess inventory and working capital bloat",
+      "description": "$75B in excess inventory across 59 A&D companies (AlixPartners, 2025). Inventory surged 44% ($90B) between 2018 and Q2 2025. At 6% financing cost, that's $4.5B/year in unnecessary interest. Middle-pack inventory turns dropped from 4-4.5x to 2.5-3.5x. Bottom quartile flat at ~1x.",
+      "evidence_source": "AlixPartners 'A&D has a $75 billion inventory problem' (Sep 2025)"
+    },
+    {
+      "rank": 2,
+      "problem": "DMSMS / obsolescence management",
+      "description": "Diminishing Manufacturing Sources and Material Shortages (DMSMS) is a chronic cost driver. Parts go out of production with little warning. DoD mandates DMSMS programs (DoDM 4140.01 Vol 3) but many distributors manage reactively, not proactively. Cost avoidance from proactive DMSMS management can be significant.",
+      "evidence_source": "DoD Manual 4140.01 Vol 3, Section 9 (DMSMS Requirements)"
+    },
+    {
+      "rank": 3,
+      "problem": "Supply chain fragility and disruption",
+      "description": "64% of aerospace companies still facing supply chain disruptions (Roland Berger, 2025). Main causes: increased lead times, limited availability of raw materials and semi-finished goods. Very severe disruptions declining but concentrated at Tier-1 and Tier-3+ levels. Industry not expected to fully recover until 2026-2027.",
+      "evidence_source": "Roland Berger 'Aerospace supply chain report 2025' (Jul 2025)"
+    },
+    {
+      "rank": 4,
+      "problem": "Customer concentration risk",
+      "description": "A&D distributors typically have few large customers (defense primes, government agencies). Revenue concentration creates existential risk if a major customer cuts orders. Most distributors lack leading indicators that would warn of customer pullback before it hits the P&L.",
+      "evidence_source": "Industry structural characteristic; Deloitte 2026 A&D Outlook"
+    },
+    {
+      "rank": 5,
+      "problem": "Counterfeit parts and quality assurance",
+      "description": "DoD mandates anti-counterfeiting programs (DoDI 4140.67, DoDM 4140.01 Vol 3 Section 5.3). Distributors must establish risk-based procedures to identify critical materiel susceptible to counterfeiting, certify authenticity of non-OEM-sourced items, and report all occurrences to GIDEP. Annual evaluation required.",
+      "evidence_source": "DoD Manual 4140.01 Vol 3, Section 5.3"
+    },
+    {
+      "rank": 6,
+      "problem": "Talent and workforce shortages",
+      "description": "65% of aerospace companies cite personnel shortages as top challenge (Roland Berger, 2025). Skills gap widening as technological advancement outpaces workforce development. Demand shifting from general programming to multidisciplinary AI/data skills. Middle management skeptical of AI transformation.",
+      "evidence_source": "Roland Berger 2025; Deloitte 2026 A&D Outlook"
+    },
+    {
+      "rank": 7,
+      "problem": "Cash-to-cash cycle deterioration",
+      "description": "C2C cycles have increased significantly (industry-wide trend). Working capital tied up in inventory means cash unavailable for operations, investment, or shareholder returns. Faster C2C cycle = fewer days cash is unavailable. APQC benchmarks C2C as a KPI in supply chain planning assessments.",
+      "evidence_source": "APQC OSB (Cash-to-cash cycle time, Measure ID 100395); AlixPartners inventory data"
+    },
+    {
+      "rank": 8,
+      "problem": "Demand signal uncertainty and whipsaw",
+      "description": "OEMs issue demand signals to suppliers, then replans when working capital balloons. Suppliers second-guess OEM demand, delay raw material orders, creating new bottlenecks and worsening whipsaw. Result: delayed ramp-ups, excess inventory, and clouded demand signals.",
+      "evidence_source": "AlixPartners 'A&D has a $75 billion inventory problem' (Sep 2025)"
+    },
+    {
+      "rank": 9,
+      "problem": "Regulatory compliance burden (ITAR, DFARS, CMMC, export controls)",
+      "description": "Defense distributors face ITAR (export controls), DFARS (defense procurement), CMMC (cybersecurity maturity), and ongoing acquisition reforms. FY2026 NDAA made changes to reduce bureaucracy but compliance remains costly. AIA advocating for further acquisition reform in FY2027 NDAA.",
+      "evidence_source": "AIA 2026 Legislative Priorities (Feb 2026); Deloitte 2026 A&D Outlook"
+    },
+    {
+      "rank": 10,
+      "problem": "Lack of supply chain visibility across tiers",
+      "description": "Companies struggle to see beyond Tier-1 suppliers. Best practices include supplier watchtowers, multi-tier visibility, and digital integration. 65% of aerospace companies use or plan to use AI but adoption limited to <10% of business processes. Main barriers: lack of experience (61%) and integration problems (53%).",
+      "evidence_source": "Roland Berger 2025; Deloitte 2026 A&D Outlook"
+    }
+  ],
+  "key_kpis": [
+    {
+      "name": "Cash-to-Cash (C2C) Cycle Time",
+      "scor_ref": "AM.1.1",
+      "apqc_id": "100395",
+      "category": "Financial",
+      "definition": "Number of days of working capital tied up in managing the supply chain. C2C = Days Inventory Outstanding + Days Sales Outstanding - Days Payable Outstanding.",
+      "benchmark": "Industry trend: rising 60% over past decade. APQC benchmarks available (members-only). No published A&D-specific median for C2C days.",
+      "data_source": "ERP (AR aging, AP aging, inventory levels)",
+      "leading_or_lagging": "lagging",
+      "priority": "critical"
+    },
+    {
+      "name": "Inventory Turnover Ratio",
+      "scor_ref": "AM (Asset Management)",
+      "apqc_id": "103482 (Total inventory turns), 100719 (Finished goods inventory turns)",
+      "category": "Inventory",
+      "definition": "Cost of Goods Sold / Average Inventory. Measures how efficiently inventory is being managed.",
+      "benchmark": {
+        "industry_median_2025": "2.5-3.5x (middle pack, down from 4-4.5x in 2018-2020)",
+        "top_quartile": ">4.1x (was >5.2x pre-crisis)",
+        "bottom_quartile": "~1x",
+        "trend": "Declining significantly. Airframers, engine manufacturers, and complex-systems suppliers experienced 30%+ drops in inventory turns."
+      },
+      "data_source": "ERP (COGS, inventory levels)",
+      "leading_or_lagging": "lagging",
+      "priority": "critical",
+      "evidence_source": "AlixPartners (Sep 2025)"
+    },
+    {
+      "name": "Perfect Order Fulfillment",
+      "scor_ref": "RL.1.1",
+      "apqc_id": "101741",
+      "category": "Operational",
+      "definition": "Percentage of orders delivered on-time, in full, in correct condition, with correct documentation, to correct customer. The SCOR Level 1 reliability metric.",
+      "benchmark": "APQC benchmarks available (members-only). SCOR performance tiers: Superior (90th percentile), Advantage (midpoint), Parity (median).",
+      "data_source": "ERP (order data, shipment data, quality records)",
+      "leading_or_lagging": "lagging",
+      "priority": "high"
+    },
+    {
+      "name": "Order Fill Rate",
+      "scor_ref": "RL (Reliability)",
+      "apqc_id": "101445",
+      "category": "Operational",
+      "definition": "Number of sales orders filled completely as a percentage of total sales orders.",
+      "benchmark": {
+        "cross_industry_median": "94.0%",
+        "sample_size": "3,218 companies (APQC OSB)"
+      },
+      "data_source": "ERP (order fulfillment data)",
+      "leading_or_lagging": "lagging",
+      "priority": "high",
+      "evidence_source": "APQC OSB (Measure ID 101445)"
+    },
+    {
+      "name": "Order Fulfillment Cycle Time",
+      "scor_ref": "RS.1.1",
+      "apqc_id": "100496",
+      "category": "Operational",
+      "definition": "Cycle time in days from customer placing an order to product/service delivery. SCOR Level 1 responsiveness metric.",
+      "benchmark": "APQC benchmarks available (members-only). No published A&D-specific median.",
+      "data_source": "ERP (order timestamps, delivery timestamps)",
+      "leading_or_lagging": "lagging",
+      "priority": "high"
+    },
+    {
+      "name": "DMSMS Risk Exposure",
+      "scor_ref": null,
+      "apqc_id": null,
+      "category": "Risk",
+      "definition": "Percentage of inventory at risk of obsolescence due to diminishing manufacturing sources and material shortages. proactive management can save millions in cost avoidance.",
+      "benchmark": "No standardized benchmark. DoD requires DMSMS programs but doesn't publish industry-wide risk exposure data.",
+      "data_source": "Parts database with manufacturer EOL dates, SEDNA or equivalent supply chain intelligence platform",
+      "leading_or_lagging": "leading",
+      "priority": "critical",
+      "evidence_source": "DoD Manual 4140.01 Vol 3, Section 9"
+    },
+    {
+      "name": "Customer Concentration Index",
+      "scor_ref": null,
+      "apqc_id": null,
+      "category": "Strategic Risk",
+      "definition": "Percentage of revenue from top customer(s). High concentration = existential risk. Should include leading indicators of customer pullback (order velocity, contract modifications).",
+      "benchmark": "No standardized benchmark. Structural characteristic of A&D distribution.",
+      "data_source": "ERP/CRM (revenue by customer, order history)",
+      "leading_or_lagging": "lagging (but can construct leading indicators)",
+      "priority": "high"
+    },
+    {
+      "name": "Days Sales Outstanding (DSO)",
+      "scor_ref": "AM",
+      "apqc_id": "100178",
+      "category": "Financial",
+      "definition": "Average days to collect payment after sale. Component of C2C cycle.",
+      "benchmark": "APQC benchmarks available (members-only).",
+      "data_source": "ERP (AR aging)",
+      "leading_or_lagging": "lagging",
+      "priority": "medium"
+    },
+    {
+      "name": "Forecast Accuracy (MAPE)",
+      "scor_ref": null,
+      "apqc_id": "100207 (national), 100210 (product family), 100215 (shipping location)",
+      "category": "Planning",
+      "definition": "Mean Absolute Percentage Error of demand forecast. Measures prediction quality.",
+      "benchmark": "APQC benchmarks available (members-only). Critical for A&D where demand whipsaw is a major problem.",
+      "data_source": "Demand planning system, SEDNA or equivalent",
+      "leading_or_lagging": "leading",
+      "priority": "high"
+    },
+    {
+      "name": "AOG (Aircraft on Ground) Resolution Time",
+      "scor_ref": null,
+      "apqc_id": null,
+      "category": "Operational",
+      "definition": "Average time to resolve an AOG event (when an aircraft is grounded waiting for parts). Critical urgency metric in aviation.",
+      "benchmark": "No standardized industry benchmark. AOG events are high-cost, high-urgency.",
+      "data_source": "ERP (order timestamps for AOG-flagged orders), customer feedback",
+      "leading_or_lagging": "lagging",
+      "priority": "high"
+    },
+    {
+      "name": "Cost of Goods Sold as % of Revenue",
+      "scor_ref": "CO.1.2",
+      "apqc_id": "100433",
+      "category": "Financial",
+      "definition": "COGS / Revenue × 100. Direct cost efficiency measure.",
+      "benchmark": "APQC benchmarks available (members-only).",
+      "data_source": "ERP (financial data)",
+      "leading_or_lagging": "lagging",
+      "priority": "medium"
+    },
+    {
+      "name": "Customer Retention Rate",
+      "scor_ref": null,
+      "apqc_id": "104302",
+      "category": "Strategic",
+      "definition": "Customer retention rate over the past three reporting periods. Critical in A&D where customer relationships are long-term and high-value.",
+      "benchmark": "APQC benchmarks available (members-only).",
+      "data_source": "CRM (customer relationship data)",
+      "leading_or_lagging": "lagging",
+      "priority": "medium"
+    }
+  ],
+  "industry_trends": [
+    {
+      "trend": "Supply chain crisis stabilizing but not resolved",
+      "description": "Roland Berger 2025 survey finds disruption severity decreasing and resilience increasing. 70% of companies now feel well-prepared for ramp-up (vs 50% in 2024). But 64% still facing disruptions. Full recovery not expected until 2026.",
+      "source": "Roland Berger (Jul 2025)",
+      "implication_for_distributors": "Window opening for distributors who can demonstrate reliability. Those still struggling with disruptions will lose share to those who have stabilized."
+    },
+    {
+      "trend": "Destocking pressure on weaker suppliers",
+      "description": "$75B in excess inventory is driving destocking. This threatens weaker suppliers, especially in aerostructures. Prolonged production at lower rates compounds stress. Distributors with lean inventory and strong turnover will gain advantage.",
+      "source": "AlixPartners (Sep 2025)",
+      "implication_for_distributors": "Distributors must demonstrate inventory efficiency. Being able to show clients 'your inventory turns are X vs industry median 3.2x' is a powerful sales tool."
+    },
+    {
+      "trend": "AI adoption accelerating but uneven",
+      "description": "65% of aerospace companies use or plan to use AI (Roland Berger). US A&D AI spending expected to reach $5.8B by 2029, 3.5x 2025 levels (IDC via Deloitte). But adoption limited to <10% of business processes. Barriers: lack of experience (61%), integration problems (53%). Agentic AI moving from pilot to scaled deployment in 2026.",
+      "source": "Roland Berger 2025; Deloitte 2026 A&D Outlook",
+      "implication_for_distributors": "AI-powered supply chain intelligence (like SEDNA) is a differentiator. But most companies are early in adoption. Distributors who can show AI-driven insights have a competitive edge."
+    },
+    {
+      "trend": "Defense acquisition reform accelerating",
+      "description": "FY2026 NDAA reduced bureaucracy and accelerated contracting. New Executive Order 'Prioritizing the Warfighter in Defense Contracting' (Jan 2026). AIA pushing for further reform in FY2027 NDAA. OTA and commercial solutions pathways expanding access for nontraditional suppliers. 'Speed to field' becoming unifying metric.",
+      "source": "AIA (Feb 2026); Deloitte 2026 A&D Outlook",
+      "implication_for_distributors": "Faster procurement cycles mean faster revenue recognition but also faster competitive displacement. distributors need to be ready to respond to compressed timelines."
+    },
+    {
+      "trend": "Aftermarket services growth",
+      "description": "Global commercial aftermarket MRO demand growing at 3.2% CAGR (2026-2035). Engine segment share rising to 53% of total MRO demand. OEMs expanding service capabilities, targeting 40-50% capacity expansions. Legacy fleets in service longer.",
+      "source": "Deloitte 2026 A&D Outlook (Aviation Week data)",
+      "implication_for_distributors": "Aftermarket = recurring revenue for parts distributors. Longer fleet life means sustained demand for obsolete/hard-to-find parts. DMSMS management becomes more valuable."
+    },
+    {
+      "trend": "Financing constraints emerging as growing concern",
+      "description": "49% of aerospace companies cite lack of financial resources as a challenge (up from 41% in 2024). Despite improved operational readiness, financial constraints could threaten sustaining or accelerating ramp-up.",
+      "source": "Roland Berger 2025",
+      "implication_for_distributors": "CFOs are under pressure to optimize working capital. This is the entry point for KPI/OKR consulting — 'let me show you where your cash is trapped and how to free it.'"
+    },
+    {
+      "trend": "Reshoring and supply chain consolidation",
+      "description": "US A&D companies pursuing supply chain consolidation (centralizing storage and sourcing domestically). International customers encouraging diversification. Vertical integration, expanded local footprints, multicountry manufacturing, long-dated supply contracts. Counterfeit parts and compliance driving digital visibility investments.",
+      "source": "Deloitte 2026 A&D Outlook",
+      "implication_for_distributors": "Domestic sourcing = opportunity for US-based distributors. But also means OEMs may bypass distributors and source directly. Value-add must be in intelligence, not just logistics."
+    },
+    {
+      "trend": "Workforce transformation — from big data to multidisciplinary",
+      "description": "Data analysis skills in A&D job postings projected to increase from 9% (2025) to 14% (2028). Data science from 3% to 5%. Shift from narrow expertise to integrated, multidisciplinary skill sets. Middle management resistant to AI adoption.",
+      "source": "Deloitte 2026 A&D Outlook",
+      "implication_for_distributors": "Small distributors (20-30 people) can't hire dedicated data scientists. But they can use AI tools and external consultants to get data capabilities without full-time hires."
+    }
+  ],
+  "benchmark_sources": [
+    {
+      "name": "AlixPartners",
+      "type": "Consulting firm report (free, publicly available)",
+      "url": "https://www.alixpartners.com/insights/102l6b8/ad-has-a-75-billion-inventory-problem/",
+      "data_available": "A&D-specific inventory turnover benchmarks (median 3.2x → 2.5-3.5x, top quartile 4.1x, bottom ~1x). $75B excess inventory. $4.5B/year in interest costs. Quarterly manufacturing overview with A&D inventory turnover trends.",
+      "use_now": true,
+      "notes": "Best free source for A&D-specific operational benchmarks. Uses S&P Capital IQ data from public filings of 59 A&D companies."
+    },
+    {
+      "name": "APQC Open Standards Benchmarking (OSB)",
+      "type": "Benchmark database (membership required)",
+      "url": "https://www.apqc.org/osb",
+      "data_available": "Cash-to-cash cycle time (ID 100395), Order fill rate (ID 101445, median 94.0%), Perfect order performance (ID 101741), Inventory turns (ID 103482, 100719), Forecast accuracy/MAPE (ID 100207), Customer retention (ID 104302), DSO (ID 100178), Days payable (ID 100642). Peer comparison by industry, region, company size. 2-week turnaround.",
+      "use_now": false,
+      "notes": "Long-term play for competing with Wipfli's benchmarking. Submit client data, get peer comparison. Closest to Wipfli's 54K-client database. 61 measures in supply chain planning survey."
+    },
+    {
+      "name": "SCOR Model (ASCM v14.0)",
+      "type": "Framework (free with ASCM registration)",
+      "url": "https://scor.ascm.org",
+      "data_available": "Standardized metric hierarchy: Level 1 (strategic) → Level 2 (diagnostic) → Level 3 (operational). 8 performance attributes: Reliability (RL), Responsiveness (RS), Agility (AG), Cost (CO), Profit (PR), Assets (AM), Environmental (EV), Social (SC). Key Level 1 metrics: Perfect Order Fulfillment (RL.1.1), Order Fulfillment Cycle Time (RS.1.1), Cash-to-Cash Cycle Time (AM.1.1), Return on Working Capital (AM.1.3).",
+      "use_now": true,
+      "notes": "Use for metric framework credibility and standardized definitions. Performance tiers: Superior (90th percentile), Advantage (midpoint), Parity (median). v14.0 updated in 2025 — added Orchestrate process, sustainability metrics, open access with free ASCM login."
+    },
+    {
+      "name": "Deloitte 2026 A&D Industry Outlook",
+      "type": "Consulting firm report (free)",
+      "url": "https://www.deloitte.com/us/en/insights/industry/aerospace-defense/aerospace-and-defense-industry-outlook.html",
+      "data_available": "5 trends: AI/agentic AI, aftermarket MRO, supply chain resilience, contracting/procurement reform, workforce transformation. A&D AI spending forecast ($5.8B by 2029). MRO demand CAGR (3.2%). Data analysis skills growth (9%→14% by 2028).",
+      "use_now": true,
+      "notes": "Best free source for strategic trends and industry direction. Annual publication."
+    },
+    {
+      "name": "Roland Berger Aerospace Supply Chain Report 2025",
+      "type": "Consulting firm report (free, PDF request)",
+      "url": "https://www.rolandberger.com/en/Insights/Publications/Aerospace-supply-chain-report-2025-Is-the-crisis-over.html",
+      "data_available": "Survey of dozens of aerospace companies across UK, Germany, France. Ramp-up readiness (70% well-prepared), personnel shortages (65%), financing concerns (49%, up from 41%), disruption prevalence (64%), AI adoption (65%, limited to <10% of processes). Conducted with ADS, BDLI, GIFAS.",
+      "use_now": true,
+      "notes": "Best source for European aerospace supply chain sentiment. Annual survey since 2023."
+    },
+    {
+      "name": "Kearney — Evolution of Supply Chain Metrics in A&D",
+      "type": "Consulting firm article (free)",
+      "url": "https://www.kearney.com/industry/aerospace-defense/article/the-evolution-of-supply-chain-metrics-in-aerospace-and-defense",
+      "data_available": "Framework for A&D supply chain metrics evolution: on-time delivery, schedule adherence, lead times, inventory metrics, operational throughput, quality/reliability, cash/cost metrics, risk/resilience indicators, digital/predictive metrics.",
+      "use_now": true,
+      "notes": "Good for framing the KPI conversation with clients — shows the evolution from retrospective to predictive metrics."
+    },
+    {
+      "name": "AIA (Aerospace Industries Association)",
+      "type": "Trade association (free)",
+      "url": "https://www.aia-aerospace.org",
+      "data_available": "2026 legislative priorities: stable funding, defense acquisition reform, commercial aviation safety, space capabilities, defense trade modernization. Industry size: 2.2M US workers, 300+ member companies. Policy positions on procurement reform.",
+      "use_now": true,
+      "notes": "Use for industry context and regulatory landscape. Not a source of operational benchmarks."
+    },
+    {
+      "name": "DoD Manual 4140.01 Volume 3",
+      "type": "Government/regulatory (free, public)",
+      "url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodm/414001_vol3.PDF",
+      "data_available": "DMSMS requirements (Section 9), materiel sourcing strategies, counterfeit materiel prevention (Section 5.3), quality programs (Section 8), supplier performance metrics, acquisition interfaces. Updated Jul 2025 (Change 2).",
+      "use_now": true,
+      "notes": "Regulatory authority for DMSMS and counterfeit avoidance. Use to understand compliance requirements that drive KPI needs."
+    },
+    {
+      "name": "Gartner",
+      "type": "Market research (paid, not A&D-specific)",
+      "url": null,
+      "data_available": "Dynamic supply chain benchmarking database covering 7 core process areas. Can filter by industry segment (industrial, consumer, life sciences) but A&D not a specific filter.",
+      "use_now": false,
+      "notes": "Not useful for A&D-specific operational benchmarks. Paid consulting service, not a data product."
+    },
+    {
+      "name": "Dresner Advisory Services",
+      "type": "Market research (paid, wrong focus)",
+      "url": null,
+      "data_available": "Wisdom of Crowds BI market studies. BI adoption, KPI usage patterns, technology priorities by industry. Manufacturing = 14% of respondents.",
+      "use_now": false,
+      "notes": "Not useful. Benchmarks BI tool usage and adoption, not operational KPIs like inventory turnover or fill rate."
+    }
+  ],
+  "forcing_questions_for_discovery": [
+    "What's your cash-to-cash cycle time right now? If you don't know, what's the closest approximation — how many days of inventory do you carry, how long does it take customers to pay, how long do you take to pay suppliers?",
+    "What percentage of your inventory is at risk of DMSMS? If you don't know, how are you managing that risk today — reactively or proactively?",
+    "If your top customer cut orders by 50% next quarter, how fast would you know — and what would give you advance warning?",
+    "When was the last time you made a decision and realized later you were looking at the wrong data? What did it cost?",
+    "What's the one report you pull every week that you immediately regret spending time on?",
+    "If I gave you a magic wand and you could see one number in real-time that you can't see now, what would it be?"
+  ],
+  "data_source_mapping_template": {
+    "systems_to_identify": ["ERP (NetSuite, SAP, Dynamics, QuickBooks)", "Inventory management system", "Financial system (AR, AP, GL)", "CRM", "Supply chain intelligence platform (e.g., SEDNA)", "Warehouse management system", "Spreadsheets"],
+    "questions_per_system": ["What data does it hold?", "What format does it export?", "Does it have an API?", "Is the data manual or automated?", "What's the data quality (latency, completeness, accuracy)?", "Can Domo connect to it (native connector, API, file export, manual upload)?"]
+  },
+  "kpi_feasibility_matrix_template": {
+    "description": "Score each candidate KPI against 4 dimensions (1=none, 5=real-time API, clean, Domo-ready)",
+    "dimensions": ["Data source available?", "Format (structured/machine-readable)?", "Quality (reliable, timely, complete)?", "Domo connectivity (native/API/file/manual)?"],
+    "example_kpis": ["Cash-to-Cash Cycle", "Fill Rate", "Inventory Turnover", "Customer Concentration", "DMSMS Risk Exposure", "AOG Resolution Time", "Forecast Accuracy"]
+  },
+  "next_steps": [
+    "Use this artifact as pre-interview context for Discovery engagements with A&D supply chain companies",
+    "Load into customer dossier workflow as the Industry Analysis tab",
+    "Feed specific KPIs and benchmarks into the Discovery interview questions",
+    "Update benchmarks when APQC membership is secured (submit client data for peer comparison)",
+    "Add new KPIs as engagements reveal gaps in this initial set"
+  ]
+}
