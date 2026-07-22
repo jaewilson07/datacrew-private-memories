@@ -7,45 +7,61 @@
 
 ## 1. Our Assumptions
 
-These are the beliefs we're selling on. Not problems we're solving — assumptions about how the market works and how to sell into it.
+These are the beliefs that make the AI Chief of Staff worth building. Every assumption directly supports the product — if the assumption is wrong, the product doesn't work.
 
-### Assumption 1: AI consulting is just management consulting
+### Assumption 1: A personal AI assistant without business context is just a calendar with a news feed
 
-We're not selling AI. We're selling the same discovery discipline management consulting has always run — "what's broken, what matters, what to measure" — with AI as the delivery accelerant. The AI doesn't replace the consultant's judgment. It replaces the manual research, the data wrangling, and the routine monitoring that used to make consulting expensive.
+Anyone can connect Google Calendar, Slack, and a news feed to an AI. That gives you "here's your schedule" and "here's what happened in your industry today." That's table stakes. The value of a Chief of Staff isn't telling you what's on your calendar — it's telling you what's happening in your business that matters. Without that layer, the AI CoS is just a smarter Siri.
 
-This is how we sell the engagement: we're not pitching technology. We're pitching a better version of a thing the client already understands — management consulting — that happens to be faster, cheaper, and continuous because AI does the heavy lifting.
+**If this is wrong:** If personal + industry context is enough, then the product is a chatbot, not a Chief of Staff, and we don't need the engagement.
 
-### Assumption 2: Customers don't always know what to measure
+### Assumption 2: "What matters" lives in people's heads, not in systems
 
-The whole consulting model assumes the customer walks in already having scoped a $50K problem. They almost never do. If a client could accurately scope the engagement on their own, they'd have already done most of the hard work — that clarity *is* most of the value.
+The CFO knows that a 3-day improvement in cash-to-cash cycle matters because they're managing a credit facility. The CFO knows that inventory turns below 3x means cash is trapped. The CFO knows that a delayed Boeing order will cascade into fill rate problems next quarter. But that context isn't in the ERP. It isn't in the BI tool. It isn't anywhere the AI can see it. It's in one person's head.
 
-So the entry point isn't a scoped project. It's a priced discovery engagement that does the scoping *for* them. We help them build a baseline for understanding their world, and we scaffold from there. The discovery is the product. The implementation is the upsell.
+The AI CoS can't read minds. It needs metrics to work with — explicit, measured, tracked. Before the AI can tell you what changed and what to do about it, someone has to define what "matters" looks like as a number.
 
-### Assumption 3: The moat isn't platform depth — it's pattern recognition
+**If this is wrong:** If the context is already in a system (the client has mature KPIs, OKRs, and benchmarks), then we skip the engagement and go straight to deploying the AI CoS on their existing metrics.
 
-AI is commoditizing implementation. Deep expertise in one platform — Salesforce, HubSpot, whatever — used to be the moat. That gap is closing faster than any firm can defend it. The defensible expertise isn't "I know your platform." It's "I know how businesses at your size and shape actually break, independent of which tools you're running."
+### Assumption 3: Getting context out of someone's head requires a structured engagement
 
-That's what the engagement prep runbook produces: pattern recognition. Industry research cached per industry, crossed with company-specific signals, synthesized into "here's what someone like you is probably worried about." That's the expertise we sell. The platform (Domo) is the delivery vehicle, not the product.
+You can't extract "what matters" with a form or a questionnaire. It requires a consultant who knows the industry, asks the right forcing questions, maps the data sources, and translates "I just know whether things are good or bad" into a system of KPIs benchmarked against industry peers. That's a priced engagement, not a free onboarding call.
 
-### Assumption 4: The fractional strategist is the model
+The engagement is the onboarding. The AI CoS is the product. You can't have the product without the onboarding — not because we're gating it, but because the AI literally has nothing to monitor without the metrics the engagement produces.
 
-Not staff augmentation. Not a one-shot project. Judgment on retainer — like a fractional CTO, but for data and AI strategy. The client isn't renting headcount by the hour. They're buying pattern-matching, earned through engagements across businesses like theirs, at a fraction of what a full-time hire or a $50K project would cost them to find out the hard way.
+**If this is wrong:** If clients can self-serve the metric definition (they already know their KPIs, benchmarks, and data sources), then the engagement is unnecessary and we sell the AI CoS as a standalone product.
 
-The engagement arc: paid discovery → implementation → 3-month check-in → ongoing fractional relationship. The discovery wins either way: the client takes it and builds internally (we still got paid for real work), or they want us to implement (we discount the first project since they already invested in the roadmap).
+### Assumption 4: A metric without a benchmark is just a number
 
-### Assumption 5: Two people, not one
+"Sales went up 5%" means nothing without "industry average is 12%." The AI CoS needs industry context to interpret what it's seeing. A 120-day cash-to-cash cycle is normal in aerospace and defense and a crisis in retail. Without the benchmark, the AI either over-alerts (flagging everything) or under-alerts (flagging nothing).
 
-You don't need one impossibly well-rounded person who's equally elite at strategy and engineering. You need two people working together: someone with a strategic, management-consulting mindset who can sit across from an SVP and ask the right probing questions, and a technical resource listening in alongside them, translating what leadership actually says into "I know how to solve that with technology."
+This is why the engagement includes industry research — not as a consulting deliverable, but as the context layer the AI CoS needs to be useful. The industry benchmarks are the AI's frame of reference for "is this normal or is this a problem?"
 
-The AI tooling is the third team member. It does the research, the monitoring, and the routine analysis. The two humans do the judgment and the relationship.
+**If this is wrong:** If interpretation isn't needed (the client just wants raw monitoring, not contextualized alerts), then the AI CoS is a simpler product and the industry research is unnecessary.
 
-### Assumption 6: Price it as real work
+### Assumption 5: Once the context is in a system, the AI can monitor it continuously
 
-The discovery engagement isn't free. Price it low enough to be a no-brainer and it reads as a demo. Price it like a real engagement — a few thousand dollars — and it has to feel worth that: the questions you ask and the output you hand back need to visibly come from expertise, not a template. The moment it's free, it stops being taken seriously as diagnosis and starts being treated as a sales call.
+The engagement puts the metrics in a system (Domo). Once they're there, the AI CoS can monitor them daily, detect anomalies, and generate briefs — without human intervention. The consultant reviews monthly, adjusts the system, and provides strategic context. But the day-to-day monitoring is automated.
 
-### Assumption 7: The "AI audit" is the wrong name
+This is the ongoing value: the engagement is finite, the monitoring is continuous. The client pays a retainer not for the consultant's time, but for the AI CoS that runs every day plus the consultant's judgment when it matters.
 
-Too generic. Doesn't tell the customer what they're actually getting. The entry offer should be called something that communicates scoping and value — Roadmap Sprint, Discovery Sprint, Opportunity Map. The name should signal: "this is a bounded, priced engagement that produces a roadmap, not a sales call."
+**If this is wrong:** If the metrics change so frequently that the AI can't keep up (constant redefinition of KPIs, shifting data sources), then the monitoring layer breaks and the product becomes manual consulting.
+
+### Assumption 6: The metrics need to be shared across the org, not just in the CFO's head
+
+The CoS isn't just for the CFO. The value of getting context out of one person's head and into a system is that other people can see it, understand it, and push in the same direction. The ops person sees the same fill rate the CFO sees. The sales team sees the same C2C target. The AI CoS briefs each stakeholder on what matters to their role.
+
+This is why KPIs and OKRs matter — not as a consulting exercise, but as the shared language the AI CoS uses to communicate. Without shared metrics, the AI briefs the CFO but nobody else can act on what it says.
+
+**If this is wrong:** If the CFO is the only person who needs this (it's a personal tool, not an org-wide system), then the product is simpler and the OKR/alignment layer is unnecessary.
+
+### Assumption 7: The engagement is the onboarding, the CoS is the product, the retainer is the relationship
+
+These three things are a package. The engagement without the CoS is just consulting — a binder that goes stale. The CoS without the engagement is just a chatbot — no business context. The retainer without either is just staff augmentation. Together, they're a continuous intelligence product that gets smarter over time.
+
+We sell the CoS. The engagement is the price of admission — not because we're upselling, but because the AI literally can't function without the metrics the engagement produces. The retainer is the ongoing relationship: the AI monitors daily, the consultant reviews monthly, the system gets smarter quarterly.
+
+**If this is wrong:** If clients want the engagement without the CoS (just the roadmap), or the CoS without the engagement (just the monitoring on metrics they already have), then we have two products, not one. That's fine — but the pricing and packaging change.
 
 ---
 
